@@ -6,13 +6,16 @@ from config import weather_token
 def get_weather(city, weather_token):
     try:
         r = requests.get(
-            f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_token}&units=metric'
+            f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_token}&units=metric'
         )
         data = r.json()
-        pprint(data)
+        # pprint(data)
 
         city = data['name']
-        temp = data['temp']
+        temp = data['main']['temp']
+        weather = data['weather']['description']
+        print(f'Погода в Городе {city}°C : {temp}\nweather')
+
 
     except Exception as ex:
         print('ex')
